@@ -1,0 +1,17 @@
+export { AccommodationType } from './accommodation-type';
+export { Address } from './address';
+export { AirConditioningService } from './air-conditioning-service';
+export { BasicInformation } from './basic-information';
+export { BasicServices } from './basic-services';
+export { CheckInCheckOut } from './check-in-check-out';
+export { Description } from './description';
+export { FacilitiesInformation } from './facilities-information';
+export { HostingType } from './hosting-type';
+export { Images } from './images';
+export { NoDefined } from './no-defined';
+export { Parking } from './parking';
+export { PrivacyType } from './privacy-type';
+export * from './payment';
+export { RoomDetails } from './room-details';
+export { SanitaryServices } from './sanitary-services';
+export { ServiceCategory } from './service-category';

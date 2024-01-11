@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeProvider, defaultTheme } from '@/theme';
+import SplashScreen from '@/screens/splash/SplashScreen';
+import Root from '@/config/navigation/Root';
 
-export default function App() {
+import syncStorage from '@/config/sync-storage';
+import { SessionProvider } from '@/contexts/session-provider';
+import { Text, View } from 'react-native';
+
+const queryClient = new QueryClient();
+
+const App = (): JSX.Element => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    syncStorage.init();
+  }, []);
+
+  if (showSplash) {
+    return <SplashScreen onSplashFinished={() => setShowSplash(false)} />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider>
+        <ThemeProvider theme={defaultTheme}>
+          <Root />
+          {/* <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text>Ejo</Text>
+          </View> */}
+        </ThemeProvider>
+      </SessionProvider>
+    </QueryClientProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
